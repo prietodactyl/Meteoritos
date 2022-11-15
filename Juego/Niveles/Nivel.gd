@@ -8,7 +8,6 @@ onready var contenedor_proyectiles:Node
 func _ready() -> void:
 	conectar_seniales()
 	crear_contenedores()
-	Eventos.connect("disparo", self, "_on_disparo")
 	
 ## Métodos Custom
 func conectar_seniales() -> void:
