@@ -10,12 +10,12 @@
 script = ExtResource( 2 )
 explosion = ExtResource( 5 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 491, 292 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
 
 [node name="EnemigoDummy" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1254, 502 )
+position = Vector2( 1248, 296 )
 scale = Vector2( 3.4, 3.4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 537, 354 )
