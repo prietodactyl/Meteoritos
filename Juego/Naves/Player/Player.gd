@@ -63,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		motor_sfx.sonido_off()
 		
 	# Control escudo
-	if event.is_action_pressed("escudo"):
+	if event.is_action_pressed("escudo") and not escudo.get_esta_activo():
 		escudo.activar()
 	
 ## Métodos Custom
