@@ -11,5 +11,5 @@ dest_files=[ "res://.import/sonido_disparo_secundario.ogg-f9574b2f9f2cc450e3e74a
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

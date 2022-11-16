@@ -16,5 +16,6 @@ velocidad_proyectil = 700
 
 [node name="DisparoSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "SFX"
 
 [node name="TimerEnfriamiento" type="Timer" parent="."]

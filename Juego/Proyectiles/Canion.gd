@@ -27,7 +27,6 @@ func set_puede_disparar(duenio_puede: bool) -> void:
 ## Métodos
 func _ready() -> void:
 	almacenar_puntos_disparo()
-	timer_enfriamiento.wait_time = cadencia_disparo
 	
 func _process(delta: float) -> void:
 	if esta_disparando and esta_enfriado:
@@ -42,7 +41,7 @@ func almacenar_puntos_disparo() -> void:
 func disparar() -> void:
 	esta_enfriado = false
 	disparo_sfx.play()
-	timer_enfriamiento.start()
+	timer_enfriamiento.start(cadencia_disparo)
 	for punto_disparo in puntos_disparo:
 		var new_proyectil:Proyectil = proyectil.instance()
 		new_proyectil.crear(
@@ -52,6 +51,5 @@ func disparar() -> void:
 			danio_proyectil
 		)
 		Eventos.emit_signal("disparo", new_proyectil)
-
-func _on_TimerEnfriamiento_timeout() -> void:
+	yield(get_tree().create_timer(cadencia_disparo), "timeout")
 	esta_enfriado = true
