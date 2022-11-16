@@ -22,6 +22,7 @@ onready var estela:Estela = $EstelaPuntoInicio/Trail2D
 onready var motor_sfx:Motor = $MotorSFX
 onready var colisionador:CollisionShape2D = $CollisionShape2D
 onready var sonido_danio:AudioStreamPlayer = $AudioStreamPlayer
+onready var escudo:Escudo = $Escudo
 
 ## Señales internas
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
@@ -60,6 +61,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_released("Mover Adelante") or event.is_action_released("Mover atrás"):
 		motor_sfx.sonido_off()
+		
+	# Control escudo
+	if event.is_action_pressed("escudo"):
+		escudo.activar()
 	
 ## Métodos Custom
 func controlador_estados(nuevo_estado:int) -> void:
