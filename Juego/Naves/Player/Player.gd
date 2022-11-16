@@ -33,11 +33,11 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 func _ready() -> void:
 	pass
 
-func _integrate_forces(state: Physics2DDirectBodyState) -> void:
+func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)
 	apply_central_impulse(empuje.rotated(rotation))
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	player_input()
 
 func _unhandled_input(event: InputEvent) -> void:
