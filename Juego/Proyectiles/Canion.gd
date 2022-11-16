@@ -8,7 +8,6 @@ export var velocidad_proyectil:int = 100
 export var danio_proyectil:int = 1
 
 ## Atributos onready
-onready var timer_enfriamiento:Timer = $TimerEnfriamiento
 onready var disparo_sfx:AudioStreamPlayer2D = $DisparoSFX
 onready var esta_enfriado:bool = true
 onready var esta_disparando:bool = false setget set_esta_disparando
@@ -41,7 +40,6 @@ func almacenar_puntos_disparo() -> void:
 func disparar() -> void:
 	esta_enfriado = false
 	disparo_sfx.play()
-	timer_enfriamiento.start(cadencia_disparo)
 	for punto_disparo in puntos_disparo:
 		var new_proyectil:Proyectil = proyectil.instance()
 		new_proyectil.crear(
