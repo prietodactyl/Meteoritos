@@ -1,9 +1,6 @@
 class_name Canion
 extends Node2D
 
-var esta_enfriado:bool = true
-var esta_disparando:bool = false setget set_esta_disparando
-var puede_disparar:bool = false setget set_puede_disparar
 
 ## Atributos
 export var proyectil:PackedScene = null
@@ -17,6 +14,9 @@ onready var temporizador := $Timer
 
 ## Atributos
 var puntos_disparo:Array = []
+var esta_enfriado:bool = true
+var esta_disparando:bool = false setget set_esta_disparando
+var puede_disparar:bool = false setget set_puede_disparar
 
 ## Setters y getters
 func set_esta_disparando(disparando:bool) -> void:

@@ -28,10 +28,15 @@ onready var escudo:Escudo = $Escudo
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":
 		controlador_estados(ESTADO.VIVO)
+
+func _on_body_entered(body: Node) -> void:
+	if body is Meteorito:
+		body.destruir()
+		destruir()
 	
 ## Métodos
 func _ready() -> void:
-	pass
+	controlador_estados(estado_actual)
 
 func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)
@@ -125,3 +130,6 @@ func recibir_danio(danio:float) -> void:
 	sonido_danio.play()
 	if hitpoints <= 0.0:
 		destruir()
+
+
+
