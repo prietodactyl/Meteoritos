@@ -5,8 +5,7 @@ export var direccion := Vector2(1, 1)
 export var rango_tamanio_meteorito := Vector2(0.5, 2.2)
 
 func _ready() -> void:
-	yield(owner, "ready")
-	spawnear_meteorito()
+	pass
 
 func spawnear_meteorito() -> void:
 	Eventos.emit_signal(

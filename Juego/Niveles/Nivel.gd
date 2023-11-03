@@ -5,10 +5,13 @@ extends Node2D
 export var explosion:PackedScene = null
 export var meteorito:PackedScene = null
 export var explosion_meteorito:PackedScene = null
+export var sector_meteoritos:PackedScene = null
 
 ## Atributos Onready
 onready var contenedor_proyectiles:Node
 onready var contenedor_meteoritos:Node
+onready var contenedor_sector_meteoritos:Node
+onready var camara_nivel:Camera2D = $CamaraNivel
 
 ## Métodos
 func _ready() -> void:
@@ -21,6 +24,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
 	Eventos.connect("spawn_meteorito", self, "_on_spawn_meteorito")
 	Eventos.connect("meteorito_destruido", self, "_on_meteorito_destruido")
+	Eventos.connect("nave_en_sector_peligro", self, "_on_nave_en_sector_peligro")
 	
 func crear_contenedores() -> void:
 	contenedor_proyectiles = Node.new()
@@ -29,6 +33,18 @@ func crear_contenedores() -> void:
 	contenedor_meteoritos = Node.new()
 	contenedor_meteoritos.name = "ContenedorMeteoritos"
 	add_child(contenedor_meteoritos)
+	contenedor_sector_meteoritos = Node.new()
+	contenedor_sector_meteoritos.name = "ContenedorSectorMeteoritos"
+	add_child(contenedor_sector_meteoritos)
+
+func crear_sector_meteoritos(centro_camara:Vector2, numero_peligros:int) -> void:
+	var new_sector_meteoritos:SectorMeteoritos = sector_meteoritos.instance()
+	new_sector_meteoritos.crear(centro_camara, numero_peligros)
+	camara_nivel.global_position = centro_camara
+	print(centro_camara)
+	print(camara_nivel.global_position)
+	camara_nivel.current = true
+	contenedor_sector_meteoritos.add_child(new_sector_meteoritos)
 
 ## Conexión Señales Externas
 
@@ -55,3 +71,10 @@ func _on_meteorito_destruido(pos: Vector2) -> void:
 	var new_explosion: ExplosionMeteorito = explosion_meteorito.instance()
 	new_explosion.global_position = pos
 	add_child(new_explosion)
+
+func _on_nave_en_sector_peligro(centro_cam:Vector2, tipo_peligro:String, num_peligros:int) -> void:
+	if tipo_peligro == "Meteorito":
+		crear_sector_meteoritos(centro_cam, num_peligros)
+	elif tipo_peligro == "Enemigo":
+		pass
+		
