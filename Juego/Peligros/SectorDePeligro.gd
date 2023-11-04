@@ -9,7 +9,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 ## Señales
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 	yield(get_tree().create_timer(0.1), "timeout")
 	enviar_senial()
