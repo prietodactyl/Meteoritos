@@ -24,6 +24,9 @@ func get_escudo() -> Escudo:
 	return escudo
 
 ## Métodos
+func _ready() -> void:
+	DatosJuego.set_player_actual(self)
+
 func _process(_delta: float) -> void:
 	player_input()
 	

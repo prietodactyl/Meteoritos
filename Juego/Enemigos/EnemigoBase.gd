@@ -1,9 +1,23 @@
 class_name EnemigoBase
 extends NaveBase
 
+## Atributos
+var player_objetivo:Player = null
+var dir_player:Vector2
+
 ## Métodos
 func _ready() -> void:
-	pass
+	player_objetivo = DatosJuego.get_player_actual()
+	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
+	
+func _physics_process(_delta: float) -> void:
+	rotar_hacia_player()
+
+## Métodos Custom
+func rotar_hacia_player() -> void:
+	if player_objetivo:
+		dir_player = player_objetivo.global_position - global_position
+		rotation = dir_player.angle()
 
 ## Señales Internas
 func _on_body_entered(body:Node) -> void:
@@ -11,3 +25,8 @@ func _on_body_entered(body:Node) -> void:
 	if body is Player:
 		body.destruir()
 		destruir()
+
+## Señales Externas
+func _on_nave_destruida(nave:NaveBase, _posicion, _explosiones) -> void:
+	if nave is Player:
+		player_objetivo = null

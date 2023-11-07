@@ -1,24 +1,59 @@
 class_name EnemigoInterceptor
 extends EnemigoBase
 
+## Enums
+enum ESTADO_IA {IDLE, ATACANDOQ, ATACANDOP, PERSECUCION}
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+## Atributos Export
+export var potencia_max:float = 800.0
 
+## Atributos
+var estado_ia_actual:int = ESTADO_IA.IDLE
+var potencia_actual:float = 0.0
 
-# Called when the node enters the scene tree for the first time.
+## Métodos
 func _ready() -> void:
 	$AnimacionesInterceptor.play("spawn")
 
+func _integrate_forces(state: Physics2DDirectBodyState) -> void:
+	linear_velocity += dir_player.normalized() * potencia_actual * state.get_step()
+	
+	linear_velocity.x = clamp(linear_velocity.x, -potencia_max, potencia_max)
+	linear_velocity.y = clamp(linear_velocity.y, -potencia_max, potencia_max)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+## Métodos Custom
+func controlador_estados_ia(nuevo_estado:int) -> void:
+	match nuevo_estado:
+		ESTADO_IA.IDLE:
+			canion.set_esta_disparando(false)
+			potencia_actual = 0.0
+		ESTADO_IA.ATACANDOQ:
+			canion.set_esta_disparando(true)
+			potencia_actual = 0.0
+		ESTADO_IA.ATACANDOP:
+			canion.set_esta_disparando(true)
+			potencia_actual = potencia_max
+		ESTADO_IA.PERSECUCION:
+			canion.set_esta_disparando(false)
+			potencia_actual = potencia_max
+		_:
+			printerr("Error de estado")
+	
+	estado_ia_actual = nuevo_estado
 
 ## Señales Internas
 func _on_AnimacionesInterceptor_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":
 		controlador_estados(ESTADO.VIVO)
-		canion.set_esta_disparando(true)
 
+func _on_AreaDisparo_body_entered(_body: Node) -> void:
+	controlador_estados_ia(ESTADO_IA.ATACANDOP)
+
+func _on_AreaDisparo_body_exited(_body: Node) -> void:
+	controlador_estados_ia(ESTADO_IA.PERSECUCION)
+
+func _on_AreaDeteccion_body_entered(_body: Node) -> void:
+	controlador_estados_ia(ESTADO_IA.ATACANDOQ)
+
+func _on_AreaDeteccion_body_exited(_body: Node) -> void:
+	controlador_estados_ia(ESTADO_IA.ATACANDOP)
