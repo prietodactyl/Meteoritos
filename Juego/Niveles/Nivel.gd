@@ -43,6 +43,7 @@ func crear_contenedores() -> void:
 	add_child(contenedor_sector_meteoritos)
 
 func crear_sector_meteoritos(centro_camara:Vector2, numero_peligros:int) -> void:
+	camara_nivel.global_position = centro_camara
 	meteoritos_totales = numero_peligros
 	var new_sector_meteoritos:SectorMeteoritos = sector_meteoritos.instance()
 	new_sector_meteoritos.crear(centro_camara, numero_peligros)

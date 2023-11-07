@@ -14,10 +14,7 @@ func _on_body_entered(_body: Node) -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	enviar_senial()
 
-func enviar_senial() -> void:
-	
-	print($PosicionCentroSector.global_position)
-	
+func enviar_senial() -> void:	
 	Eventos.emit_signal(
 		"nave_en_sector_peligro",
 		$PosicionCentroSector.global_position,

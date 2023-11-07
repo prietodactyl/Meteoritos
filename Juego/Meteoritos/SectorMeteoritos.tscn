@@ -249,7 +249,7 @@ Lluvia de meteoritos inminente"
 align = 1
 valign = 1
 
-[node name="Bordes" type="Node" parent="."]
+[node name="Bordes" type="Node2D" parent="."]
 
 [node name="Borde1" type="StaticBody2D" parent="Bordes"]
 position = Vector2( -960, 0 )
@@ -283,7 +283,7 @@ collision_layer = 0
 position = Vector2( 2.5, 32 )
 shape = SubResource( 4 )
 
-[node name="Detectores" type="Node" parent="."]
+[node name="Detectores" type="Node2D" parent="."]
 
 [node name="Detector1" type="Area2D" parent="Detectores"]
 position = Vector2( -1500, 0 )
@@ -313,7 +313,7 @@ position = Vector2( 0, 1080 )
 position = Vector2( 0.5, 23.5 )
 shape = SubResource( 8 )
 
-[node name="Spawners" type="Node" parent="."]
+[node name="Spawners" type="Node2D" parent="."]
 
 [node name="MeteoritoSpawner" parent="Spawners" instance=ExtResource( 1 )]
 position = Vector2( -1250, -850 )

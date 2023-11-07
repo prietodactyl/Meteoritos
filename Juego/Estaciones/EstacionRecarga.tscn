@@ -117,7 +117,7 @@ shape = SubResource( 1 )
 
 [node name="AreaColision" type="Area2D" parent="."]
 collision_layer = 32
-collision_mask = 27
+collision_mask = 25
 
 [node name="SpriteAreaColision" type="Sprite" parent="AreaColision"]
 z_index = 1
