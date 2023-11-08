@@ -26,6 +26,7 @@ can_sleep = false
 linear_damp = 1.5
 angular_damp = 4.5
 script = ExtResource( 2 )
+hitpoints = 150.0
 numero_explosiones = 3
 potencia_motor = 30
 potencia_rotacion = 200
@@ -36,13 +37,21 @@ rotation = 1.5708
 texture = ExtResource( 1 )
 
 [node name="Escudo" parent="." index="1" instance=ExtResource( 9 )]
+visible = false
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )
 
 [node name="Canion" parent="." index="3"]
 cadencia_disparo = 0.4
-velocidad_proyectil = 1200
+velocidad_proyectil = 1500
+danio_proyectil = 2
+
+[node name="PuntoIzquierdo" parent="Canion" index="0"]
+position = Vector2( 0, -30 )
+
+[node name="PuntoDerecho" parent="Canion" index="1"]
+position = Vector2( 0, 30 )
 
 [node name="EstelaPuntoInicio" parent="." index="5" instance=ExtResource( 3 )]
 position = Vector2( -15, 0 )

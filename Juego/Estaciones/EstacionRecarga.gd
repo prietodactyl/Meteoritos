@@ -34,6 +34,7 @@ func puede_recargar(event:InputEvent) -> bool:
 	if hay_input and player_en_zona and energia > 0.0:
 		if !carga_sfx.playing:
 			carga_sfx.play()
+			print(energia)
 		return true
 		
 	return false

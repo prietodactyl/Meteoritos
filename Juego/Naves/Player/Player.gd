@@ -23,6 +23,9 @@ func get_laser() -> RayoLaser:
 func get_escudo() -> Escudo:
 	return escudo
 
+func get_position() -> Vector2:
+	return position
+
 ## Métodos
 func _ready() -> void:
 	DatosJuego.set_player_actual(self)

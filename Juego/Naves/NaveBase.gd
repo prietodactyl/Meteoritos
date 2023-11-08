@@ -15,7 +15,7 @@ var estado_actual:int = ESTADO.SPAWN
 onready var canion:Canion = $Canion
 onready var colisionador:CollisionShape2D = $CollisionShape2D
 onready var sonido_danio:AudioStreamPlayer = $ImpactoSFX
-	
+
 ## Métodos
 func _ready() -> void:
 	controlador_estados(estado_actual)

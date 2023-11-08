@@ -11,7 +11,7 @@ friction = 0.0
 bounce = 0.5
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 60, 67.5 )
+extents = Vector2( 74.5, 85 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -156,11 +156,11 @@ tracks/3/keys = {
 "values": [ Vector2( 3, 3 ), Vector2( 4, 4 ), Vector2( 3, 3 ), Vector2( 4, 4 ), Vector2( 3, 3 ), Vector2( 1e-05, 1e-05 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 1099.18
-
 [sub_resource type="CircleShape2D" id=6]
-radius = 542.404
+radius = 960.063
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 650.372
 
 [node name="EnemigoInterceptor" instance=ExtResource( 1 )]
 collision_mask = 11
@@ -169,7 +169,7 @@ contacts_reported = 2
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 4 )
-hitpoints = 10.0
+hitpoints = 12.0
 numero_explosiones = 1
 potencia_max = 720.0
 
@@ -183,20 +183,21 @@ rotation = -1.5708
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2( 1, -0.5 )
+position = Vector2( 0.5, 0 )
 shape = SubResource( 8 )
 
 [node name="Canion" parent="." index="3"]
-position = Vector2( 40, 0 )
+position = Vector2( 55, 0 )
 proyectil = ExtResource( 5 )
-cadencia_disparo = 1.2
-velocidad_proyectil = 1200
+cadencia_disparo = 1.5
+velocidad_proyectil = 1500
+danio_proyectil = 0
 
 [node name="PuntoIzquierdo" parent="Canion" index="0"]
-position = Vector2( 0, -22 )
+position = Vector2( 0, -35 )
 
 [node name="PuntoDerecho" parent="Canion" index="1"]
-position = Vector2( 0, 22 )
+position = Vector2( 0, 35 )
 
 [node name="ImpactoSFX" parent="." index="4"]
 volume_db = -10.0
@@ -206,22 +207,24 @@ anims/RESET = SubResource( 4 )
 anims/default = SubResource( 3 )
 anims/spawn = SubResource( 2 )
 
-[node name="AreaDisparo" type="Area2D" parent="." index="6"]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDisparo" index="0"]
-shape = SubResource( 5 )
-
-[node name="AreaDeteccion" type="Area2D" parent="." index="7"]
+[node name="AreaDeteccion" type="Area2D" parent="." index="6"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" index="0"]
 shape = SubResource( 6 )
 
+[node name="AreaDisparo" type="Area2D" parent="." index="7"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDisparo" index="0"]
+shape = SubResource( 5 )
+
+[node name="TweenMovimiento" type="Tween" parent="." index="8"]
+
 [connection signal="animation_finished" from="AnimacionesInterceptor" to="." method="_on_AnimacionesInterceptor_animation_finished"]
-[connection signal="body_entered" from="AreaDisparo" to="." method="_on_AreaDisparo_body_entered"]
-[connection signal="body_exited" from="AreaDisparo" to="." method="_on_AreaDisparo_body_exited"]
 [connection signal="body_entered" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_entered"]
 [connection signal="body_exited" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_exited"]
+[connection signal="body_entered" from="AreaDisparo" to="." method="_on_AreaDisparo_body_entered"]
+[connection signal="body_exited" from="AreaDisparo" to="." method="_on_AreaDisparo_body_exited"]
 
 [editable path="Canion"]

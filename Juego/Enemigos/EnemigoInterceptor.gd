@@ -10,9 +10,11 @@ export var potencia_max:float = 800.0
 ## Atributos
 var estado_ia_actual:int = ESTADO_IA.IDLE
 var potencia_actual:float = 0.0
+var puede_cambiar_estado:bool = false
 
 ## Métodos
 func _ready() -> void:
+	controlador_estados_ia(ESTADO_IA.IDLE)
 	$AnimacionesInterceptor.play("spawn")
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
@@ -30,6 +32,7 @@ func controlador_estados_ia(nuevo_estado:int) -> void:
 		ESTADO_IA.ATACANDOQ:
 			canion.set_esta_disparando(true)
 			potencia_actual = 0.0
+			ralentizar()
 		ESTADO_IA.ATACANDOP:
 			canion.set_esta_disparando(true)
 			potencia_actual = potencia_max
@@ -41,19 +44,45 @@ func controlador_estados_ia(nuevo_estado:int) -> void:
 	
 	estado_ia_actual = nuevo_estado
 
+func ralentizar() -> void:
+	$TweenMovimiento.interpolate_property(
+		self,
+		"linear_velocity",
+		linear_velocity,
+		crear_velocidad_aleatoria(60, 60),
+		1.8,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	$TweenMovimiento.start()
+
+func crear_velocidad_aleatoria(rango_horizontal:float, rango_vertical:float) -> Vector2:
+	randomize()
+	var rand_x = rand_range(-rango_horizontal, rango_horizontal)
+	var rand_y = rand_range(-rango_vertical, rango_vertical)
+	
+	return Vector2(rand_x, rand_y)
+
 ## Señales Internas
 func _on_AnimacionesInterceptor_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":
 		controlador_estados(ESTADO.VIVO)
+		puede_cambiar_estado = true
+		controlador_estados_ia(ESTADO_IA.PERSECUCION)
+		
 
 func _on_AreaDisparo_body_entered(_body: Node) -> void:
-	controlador_estados_ia(ESTADO_IA.ATACANDOP)
+	if puede_cambiar_estado:
+		controlador_estados_ia(ESTADO_IA.ATACANDOQ)
 
 func _on_AreaDisparo_body_exited(_body: Node) -> void:
-	controlador_estados_ia(ESTADO_IA.PERSECUCION)
+	if puede_cambiar_estado:
+		controlador_estados_ia(ESTADO_IA.ATACANDOP)
 
 func _on_AreaDeteccion_body_entered(_body: Node) -> void:
-	controlador_estados_ia(ESTADO_IA.ATACANDOQ)
+	if puede_cambiar_estado:
+		controlador_estados_ia(ESTADO_IA.ATACANDOP)
 
 func _on_AreaDeteccion_body_exited(_body: Node) -> void:
-	controlador_estados_ia(ESTADO_IA.ATACANDOP)
+	if puede_cambiar_estado:
+		controlador_estados_ia(ESTADO_IA.PERSECUCION)
