@@ -1,0 +1,141 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Juego/Estaciones/AreaAtraccion.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Naves/Player/sonido_danio_player.wav" type="AudioStream" id=2]
+[ext_resource path="res://TemporalAssets/kenney_spaceshooterextension/PNG/Sprites/Station/spaceStation_017.png" type="Texture" id=3]
+[ext_resource path="res://TemporalAssets/kenney_spaceshooterextension/PNG/Sprites/Station/spaceStation_029.png" type="Texture" id=4]
+[ext_resource path="res://TemporalAssets/kenney_spaceshooterextension/PNG/Sprites/Station/spaceStation_028.png" type="Texture" id=5]
+[ext_resource path="res://TemporalAssets/kenney_spaceshooterextension/PNG/Sprites/Station/spaceStation_024.png" type="Texture" id=6]
+[ext_resource path="res://Juego/Estaciones/BaseEnemiga.gd" type="Script" id=7]
+[ext_resource path="res://Juego/Enemigos/AreaColision.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AreaAtraccion:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AreaColision:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "rotacion_anti_horaria"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AreaAtraccion:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AreaColision:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "rotacion_horaria"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AreaAtraccion:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AreaColision:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="BaseEnemiga" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="AreaAtraccion" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="AreaColision" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 9
+script = ExtResource( 8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AreaColision"]
+polygon = PoolVector2Array( 18.2246, 11.4294, 184.537, 20.4193, 183.038, -23.0316, 25.7161, -20.035, 60.1772, -160.876, 18.2246, -193.839, -16.2365, -193.839, -64.1823, -156.381, -20.7314, -18.5367, -134.603, -15.5401, -134.603, 12.9277, -17.7347, 17.4226, -13.2399, 294.609, 10.7331, 294.609 )
+
+[node name="Sprite" type="Node2D" parent="AreaColision"]
+
+[node name="EstacionSprite1" type="Sprite" parent="AreaColision/Sprite"]
+position = Vector2( 147, 0 )
+rotation = 3.14159
+texture = ExtResource( 3 )
+
+[node name="EstacionSprite2" type="Sprite" parent="AreaColision/Sprite"]
+position = Vector2( -4, 98 )
+texture = ExtResource( 6 )
+
+[node name="EstacionSprite3" type="Sprite" parent="AreaColision/Sprite"]
+position = Vector2( 0, -167 )
+texture = ExtResource( 5 )
+
+[node name="EstacionSprite4" type="Sprite" parent="AreaColision/Sprite"]
+position = Vector2( 0, -120 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 2 )
+anims/rotacion_anti_horaria = SubResource( 3 )
+anims/rotacion_horaria = SubResource( 4 )
+
+[node name="ImpactoSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]

@@ -51,6 +51,7 @@ func _on_AreaColision_body_entered(body: Node) -> void:
 		body.destruir()
 
 
+
 func _on_AreaRecarga_body_entered(body: Node) -> void:
 	if body is Player:
 		nave_player = body
@@ -64,5 +65,3 @@ func _on_AreaRecarga_body_exited(body: Node) -> void:
 		player_en_zona = false
 	
 	body.set_gravity_scale(0.0)
-	carga_sfx.stop()
-	vacio_sfx.stop()
