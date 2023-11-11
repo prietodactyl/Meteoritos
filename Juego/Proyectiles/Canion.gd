@@ -40,18 +40,19 @@ func almacenar_puntos_disparo() -> void:
 			puntos_disparo.append(nodo)
 			
 func disparar() -> void:
-	esta_enfriado = false
-	disparo_sfx.play()
-	temporizador.start(cadencia_disparo)
-	for punto_disparo in puntos_disparo:
-		var new_proyectil:Proyectil = proyectil.instance()
-		new_proyectil.crear(
-			punto_disparo.global_position,
-			get_owner().rotation,
-			velocidad_proyectil,
-			danio_proyectil
-		)
-		Eventos.emit_signal("disparo", new_proyectil)
+	if puede_disparar:
+		esta_enfriado = false
+		disparo_sfx.play()
+		temporizador.start(cadencia_disparo)
+		for punto_disparo in puntos_disparo:
+			var new_proyectil:Proyectil = proyectil.instance()
+			new_proyectil.crear(
+				punto_disparo.global_position,
+				get_owner().rotation,
+				velocidad_proyectil,
+				danio_proyectil
+			)
+			Eventos.emit_signal("disparo", new_proyectil)
 
 func _on_Timer_timeout() -> void:
 	esta_enfriado = true

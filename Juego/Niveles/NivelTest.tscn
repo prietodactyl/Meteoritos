@@ -22,14 +22,14 @@ sector_meteoritos = ExtResource( 4 )
 enemigo_interceptor = ExtResource( 11 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 25, 777 )
+position = Vector2( -582, 2113 )
 potencia_rotacion = 120
 
 [node name="TriggersLluviaMeteoritos" type="Node" parent="."]
 
 [node name="SectorDePeligro2" parent="TriggersLluviaMeteoritos" instance=ExtResource( 6 )]
 position = Vector2( 659, 304 )
-tipo_peligro = "Meteorito"
+tipo_peligro = "Enemigo"
 numero_peligros = 2
 
 [node name="TriggersInterceptores" type="Node" parent="."]

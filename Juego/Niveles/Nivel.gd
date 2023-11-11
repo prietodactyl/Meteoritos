@@ -35,6 +35,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("meteorito_destruido", self, "_on_meteorito_destruido")
 	Eventos.connect("nave_en_sector_peligro", self, "_on_nave_en_sector_peligro")
 	Eventos.connect("base_destruida", self, "_on_base_destruida")
+	Eventos.connect("spawn_orbital", self, "_on_spawn_orbital")
 	
 func crear_contenedores() -> void:
 	contenedor_proyectiles = Node.new()
@@ -122,9 +123,8 @@ func crear_explosiones(posicion:Vector2,
 				rangos_aleatorios.y
 			)
 			new_explosion.scale = tamanio_explosion
-			print(tamanio_explosion)
 			add_child(new_explosion)
-			yield(get_tree().create_timer(0.6), "timeout")
+			yield(get_tree().create_timer(intervalo), "timeout")
 
 ## Señales Internas
 func _on_TweenCamara_tween_completed(object: Object, _key: NodePath) -> void:
@@ -144,7 +144,7 @@ func _on_nave_destruida(nave:NaveBase, posicion:Vector2, num_explosiones: int) -
 			tiempo_transicion_camara
 		)
 		
-		crear_explosiones(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
+	crear_explosiones(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
 
 
 func _on_spawn_meteorito(pos_spawn: Vector2, dir_meteorito:Vector2, tamanio:float) -> void:
@@ -169,7 +169,10 @@ func _on_nave_en_sector_peligro(centro_cam:Vector2, tipo_peligro:String, num_pel
 	elif tipo_peligro == "Enemigo":
 		crear_sector_enemigos(num_peligros)
 
-func _on_base_destruida(pos_partes:Array) -> void:
+func _on_base_destruida(_base, pos_partes:Array) -> void:
 	for pos in pos_partes:
 		crear_explosiones(pos)
 		yield(get_tree().create_timer(0.5),"timeout")
+
+func _on_spawn_orbital(enemigo:EnemigoOrbital) -> void:
+	contenedor_enemigos.add_child(enemigo)
