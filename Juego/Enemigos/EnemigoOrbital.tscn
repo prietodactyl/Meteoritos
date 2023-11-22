@@ -36,6 +36,7 @@ script = ExtResource( 1 )
 hitpoints = 5.0
 numero_explosiones = 1
 rango_max_ataque = 1400.0
+velocidad = 400.0
 
 [node name="Sprite" parent="." index="0"]
 rotation = -1.5708
@@ -51,6 +52,7 @@ position = Vector2( 30, 0 )
 proyectil = ExtResource( 4 )
 cadencia_disparo = 1.5
 velocidad_proyectil = 1600
+danio_proyectil = 0
 
 [node name="PuntoIzquierdo" parent="Canion" index="0"]
 position = Vector2( 0, -15 )
@@ -61,6 +63,12 @@ position = Vector2( 0, 15 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 autoplay = "spawn"
 anims/spawn = SubResource( 3 )
+
+[node name="DetectorObstaculo" type="RayCast2D" parent="." index="5"]
+enabled = true
+cast_to = Vector2( 500, 0 )
+collision_mask = 32
+collide_with_areas = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
