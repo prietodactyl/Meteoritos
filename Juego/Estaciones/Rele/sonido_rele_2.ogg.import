@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sonido_rele_2.ogg-c1d624915ca3b8aa5ef12d58b5e71670.oggstr"
+
+[deps]
+
+source_file="res://Juego/Estaciones/Rele/sonido_rele_2.ogg"
+dest_files=[ "res://.import/sonido_rele_2.ogg-c1d624915ca3b8aa5ef12d58b5e71670.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -8,10 +8,12 @@ export var explosion_meteorito:PackedScene = null
 export var sector_meteoritos:PackedScene = null
 export var tiempo_transicion_camara:float = 2.0
 export var enemigo_interceptor:PackedScene = null
+export var rele_masa:PackedScene = null
 
 ## Atributos
 var meteoritos_totales: int = 0
 var player:Player = null
+var numero_bases_enemigas:int = 0
 
 ## Atributos Onready
 onready var contenedor_proyectiles:Node
@@ -20,12 +22,14 @@ onready var contenedor_sector_meteoritos:Node
 onready var camara_nivel:Camera2D = $CamaraNivel
 onready var camara_player:Camera2D = $Player/CamaraPlayer
 onready var contenedor_enemigos:Node
+onready var contenedor_bases_enemigas:Node = $ContenedorBasesEnemigas
 
 ## Métodos
 func _ready() -> void:
 	conectar_seniales()
 	crear_contenedores()
 	player = DatosJuego.get_player_actual()
+	numero_bases_enemigas = contabilizar_bases_enemigas()
 	
 ## Métodos Custom
 func conectar_seniales() -> void:
@@ -126,6 +130,37 @@ func crear_explosiones(posicion:Vector2,
 			add_child(new_explosion)
 			yield(get_tree().create_timer(intervalo), "timeout")
 
+func contabilizar_bases_enemigas() -> int:
+	return contenedor_bases_enemigas.get_child_count()
+
+func crear_rele() -> void:	
+	var new_rele_masa:ReleDeMasa = rele_masa.instance()
+	new_rele_masa.global_position = crear_posicion_aleatoria_rele()
+	add_child(new_rele_masa)
+
+func crear_posicion_aleatoria_rele() -> Vector2:
+	randomize()
+	var valor_aleatorio = randi() % 7
+	match valor_aleatorio:
+		0:
+			return player.global_position + Vector2(-600,-300)
+		1:
+			return player.global_position + Vector2(-300,-600)
+		2:
+			return player.global_position + Vector2(300,-600)
+		3:
+			return player.global_position + Vector2(600,-300)
+		4:
+			return player.global_position + Vector2(600,300)
+		5:
+			return player.global_position + Vector2(300,600)
+		6:
+			return player.global_position + Vector2(-300,600)
+		7:
+			return player.global_position + Vector2(-600,300)
+		_:
+			return player.global_position 
+
 ## Señales Internas
 func _on_TweenCamara_tween_completed(object: Object, _key: NodePath) -> void:
 	if object.name == "CamaraPlayer":
@@ -173,6 +208,10 @@ func _on_base_destruida(_base, pos_partes:Array) -> void:
 	for pos in pos_partes:
 		crear_explosiones(pos)
 		yield(get_tree().create_timer(0.5),"timeout")
+	
+	numero_bases_enemigas -= 1
+	if numero_bases_enemigas == 0:
+		crear_rele()
 
 func _on_spawn_orbital(enemigo:EnemigoOrbital) -> void:
 	contenedor_enemigos.add_child(enemigo)
