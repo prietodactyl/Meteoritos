@@ -26,6 +26,7 @@ onready var contenedor_bases_enemigas:Node = $ContenedorBasesEnemigas
 
 ## Métodos
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	conectar_seniales()
 	crear_contenedores()
 	player = DatosJuego.get_player_actual()
