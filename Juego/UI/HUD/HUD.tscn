@@ -1,0 +1,351 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://playerShip1_orange.png" type="Texture" id=1]
+[ext_resource path="res://Juego/UI/HUD/HUD.gd" type="Script" id=2]
+[ext_resource path="res://Juego/UI/HUD/ContenedorInformacion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/UI/HUD/ContenedorInformacionEnergia.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "mostrar"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "mostrar_suavizado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "ocultar"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "ocultar_suavizado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "mostrar"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "mostrar_suavizado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "ocultar"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "ocultar_suavizado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "mostrar"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "mostrar_suavizado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 1.501 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "ocultar"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "ocultar_suavizado"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="FadeCanvas" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="FadeCanvas"]
+modulate = Color( 0, 0, 0, 0 )
+margin_right = 1920.0
+margin_bottom = 1080.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="FadeCanvas/ColorRect"]
+margin_left = 616.0
+margin_top = 267.0
+margin_right = 1246.0
+margin_bottom = 768.0
+mouse_filter = 2
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeCanvas"]
+anims/default = SubResource( 1 )
+anims/fade_in = SubResource( 2 )
+
+[node name="InfoZonaRecarga" parent="." instance=ExtResource( 3 )]
+margin_right = 362.0
+margin_bottom = 162.0
+
+[node name="Label" parent="InfoZonaRecarga" index="1"]
+margin_top = 0.0
+margin_right = 350.0
+margin_bottom = 150.0
+text = "En zona de recarga"
+
+[node name="InfoMeteoritos" parent="." instance=ExtResource( 3 )]
+margin_top = 918.0
+margin_right = 362.0
+margin_bottom = 1068.0
+auto_ocultar = true
+
+[node name="AnimationPlayer" parent="InfoMeteoritos" index="0"]
+anims/mostrar = SubResource( 3 )
+anims/mostrar_suavizado = SubResource( 4 )
+anims/ocultar = SubResource( 5 )
+anims/ocultar_suavizado = SubResource( 6 )
+
+[node name="Label" parent="InfoMeteoritos" index="1"]
+margin_top = 0.0
+margin_right = 350.0
+margin_bottom = 150.0
+text = "Meteoritos restantes
+0"
+
+[node name="InfoTiempoRestante" parent="." instance=ExtResource( 3 )]
+margin_left = 1558.0
+margin_right = 1908.0
+margin_bottom = 152.0
+auto_ocultar = true
+
+[node name="AnimationPlayer" parent="InfoTiempoRestante" index="0"]
+anims/mostrar = SubResource( 7 )
+anims/mostrar_suavizado = SubResource( 8 )
+anims/ocultar = SubResource( 9 )
+anims/ocultar_suavizado = SubResource( 10 )
+
+[node name="Label" parent="InfoTiempoRestante" index="1"]
+text = "Meteoritos restantes
+0"
+
+[node name="InfoLaser" parent="." instance=ExtResource( 4 )]
+margin_left = 1558.0
+margin_top = 912.0
+margin_right = 1908.0
+margin_bottom = 1062.0
+
+[node name="Label" parent="InfoLaser" index="1"]
+margin_top = 0.0
+margin_right = 350.0
+margin_bottom = 150.0
+text = "energia laser
+
+"
+
+[node name="ProgressBar" parent="InfoLaser" index="3"]
+margin_left = 21.0
+margin_top = 86.0
+margin_right = 327.0
+margin_bottom = 125.0
+
+[node name="InfoEscudo" parent="." instance=ExtResource( 4 )]
+margin_left = 1558.0
+margin_top = 748.0
+margin_right = 1908.0
+margin_bottom = 898.0
+
+[node name="AnimationPlayer" parent="InfoEscudo" index="0"]
+anims/mostrar = SubResource( 11 )
+anims/mostrar_suavizado = SubResource( 12 )
+anims/ocultar = SubResource( 13 )
+anims/ocultar_suavizado = SubResource( 14 )
+
+[node name="Label" parent="InfoEscudo" index="1"]
+margin_top = 0.0
+margin_right = 350.0
+margin_bottom = 150.0
+text = "energia escudo
+
+"
+
+[node name="ProgressBar" parent="InfoEscudo" index="3"]
+margin_left = 21.0
+margin_top = 86.0
+margin_right = 327.0
+margin_bottom = 125.0
+
+[editable path="InfoZonaRecarga"]
+[editable path="InfoMeteoritos"]
+[editable path="InfoTiempoRestante"]
+[editable path="InfoLaser"]
+[editable path="InfoEscudo"]
