@@ -182,7 +182,6 @@ func _on_RestartTimer_timeout() -> void:
 	yield(get_tree().create_timer(1.0),"timeout")
 	get_tree().reload_current_scene()
 
-
 func _on_ActualizadorTimer_timeout() -> void:
 	tiempo_limite -= 1
 	Eventos.emit_signal("actualizar_tiempo_restante", tiempo_limite)

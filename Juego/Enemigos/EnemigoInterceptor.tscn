@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Juego/Enemigos/EnemigoBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Enemigos/spawn_interceptor.png" type="Texture" id=2]
@@ -162,6 +162,31 @@ radius = 960.063
 [sub_resource type="CircleShape2D" id=5]
 radius = 650.372
 
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.811765, 0.803922, 0.054902, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.670588, 0.054902, 0.054902, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="EnemigoInterceptor" groups=["minimap"] instance=ExtResource( 1 )]
 collision_mask = 11
 physics_material_override = SubResource( 7 )
@@ -219,6 +244,18 @@ collision_layer = 0
 shape = SubResource( 5 )
 
 [node name="TweenMovimiento" type="Tween" parent="." index="8"]
+
+[node name="BarraSalud" parent="." index="9"]
+margin_left = -110.0
+margin_top = 75.0
+margin_right = 40.0
+margin_bottom = 95.0
+rect_rotation = -90.0
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
+value = 80.0
+rounded = true
+percent_visible = false
 
 [connection signal="animation_finished" from="AnimacionesInterceptor" to="." method="_on_AnimacionesInterceptor_animation_finished"]
 [connection signal="body_entered" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_entered"]

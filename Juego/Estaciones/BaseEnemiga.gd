@@ -11,6 +11,7 @@ export var intervalo_spawn:float = 0.8
 onready var animaciones:AnimationPlayer = $AnimationPlayer
 onready var impacto_sfx:AudioStreamPlayer2D = $ImpactoSFX
 onready var timer_spawner:Timer = $TimerSpawnerEnemigos
+onready var barra_salud:BarraSalud = $AreaColision/BarraSalud
 
 ## Atributos
 var esta_destruido:bool = false
@@ -19,6 +20,7 @@ var posicion_spawn:Vector2 = Vector2.ZERO
 ## Métodos
 func _ready() -> void:
 	timer_spawner.wait_time = intervalo_spawn
+	barra_salud.set_valores(hitpoints)
 	animaciones.play(elegir_animacion_aleatoria())
 	
 ## Métodos Custom
@@ -38,6 +40,7 @@ func recibir_danio(danio:float) -> void:
 		destruir()
 	
 	impacto_sfx.play()
+	barra_salud.set_hitpoints_actuales(hitpoints)
 
 func destruir() -> void:
 	var posicion_partes:Array = [

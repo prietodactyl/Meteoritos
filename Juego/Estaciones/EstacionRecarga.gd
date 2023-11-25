@@ -12,10 +12,12 @@ var player_en_zona:bool = false
 ## Atributos Onready
 onready var carga_sfx:AudioStreamPlayer = $CargaSFX
 onready var vacio_sfx:AudioStreamPlayer = $VacioSFX
+onready var barra_energia:ProgressBar = $BarraEnergia
 
 ## Métodos
 func _ready() -> void:
-	pass # Replace with function body.
+	barra_energia.max_value = energia
+	barra_energia.value = energia
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not puede_recargar(event):
@@ -43,6 +45,7 @@ func puede_recargar(event:InputEvent) -> bool:
 
 func controlar_energia() -> void:
 	energia -= radio_energia_entregada
+	barra_energia.value = energia
 
 ## Señales Internas
 func _on_AreaColision_body_entered(body: Node) -> void:
