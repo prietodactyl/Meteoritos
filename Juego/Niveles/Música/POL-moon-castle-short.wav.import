@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/POL-combat-plan-short.wav-5393614ee16634f0d618c673b01e0205.sample"
+path="res://.import/POL-moon-castle-short.wav-3d91ee3eb6e3cabb66fc77af854ad8bc.sample"
 
 [deps]
 
-source_file="res://Juego/Niveles/Música/POL-combat-plan-short.wav"
-dest_files=[ "res://.import/POL-combat-plan-short.wav-5393614ee16634f0d618c673b01e0205.sample" ]
+source_file="res://Juego/Niveles/Música/POL-moon-castle-short.wav"
+dest_files=[ "res://.import/POL-moon-castle-short.wav-3d91ee3eb6e3cabb66fc77af854ad8bc.sample" ]
 
 [params]
 
