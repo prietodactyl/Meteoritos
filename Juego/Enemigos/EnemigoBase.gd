@@ -33,3 +33,6 @@ func _on_body_entered(body:Node) -> void:
 func _on_nave_destruida(nave:NaveBase, _posicion, _explosiones) -> void:
 	if nave is Player:
 		player_objetivo = null
+	
+	if nave.is_in_group("minimap"):
+		Eventos.emit_signal("minimap_objeto_destruido", nave)

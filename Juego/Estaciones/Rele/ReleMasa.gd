@@ -6,6 +6,10 @@ onready var animaciones:AnimationPlayer = $Animaciones
 onready var colision_detector_player:CollisionShape2D = $DetectorPlayer/CollisionShape2D
 onready var tween:Tween = $Tween
 
+## Métodos
+func _ready() -> void:
+	Eventos.emit_signal("minimap_objeto_creado")
+
 ## Métodos Custom
 func atraer_player(body: Node) -> void:
 	tween.interpolate_property(

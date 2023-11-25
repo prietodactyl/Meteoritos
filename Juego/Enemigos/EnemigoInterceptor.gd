@@ -16,6 +16,7 @@ var puede_cambiar_estado:bool = false
 func _ready() -> void:
 	controlador_estados_ia(ESTADO_IA.IDLE)
 	$AnimacionesInterceptor.play("spawn")
+	Eventos.emit_signal("minimap_objeto_creado")
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	linear_velocity += dir_player.normalized() * potencia_actual * state.get_step()

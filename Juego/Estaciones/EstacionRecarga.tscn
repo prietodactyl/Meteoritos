@@ -42,7 +42,7 @@ tracks/0/keys = {
 resource_name = "default"
 length = 0.001
 
-[node name="EstacionRecarga" type="Node2D"]
+[node name="EstacionRecarga" type="Node2D" groups=["minimap"]]
 script = ExtResource( 3 )
 
 [node name="AreaRecarga" parent="." instance=ExtResource( 1 )]

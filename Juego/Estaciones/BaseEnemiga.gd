@@ -47,6 +47,7 @@ func destruir() -> void:
 		$AreaColision/Sprite/EstacionSprite4.global_position
 	]
 	Eventos.emit_signal("base_destruida", self, posicion_partes)
+	Eventos.emit_signal("minimap_objeto_destruido", self)
 	queue_free()
 
 func spawnear_orbital() -> void:
