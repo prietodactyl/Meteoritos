@@ -1,0 +1,291 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Juego/Niveles/Fondos/StarFieldBackground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/UI/BotonBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Juego/UI/MenuVictoria.gd" type="Script" id=3]
+[ext_resource path="res://Juego/Enemigos/interceptor.png" type="Texture" id=4]
+[ext_resource path="res://Juego/Naves/Player/player_orange.png" type="Texture" id=5]
+[ext_resource path="res://Juego/Proyectiles/proyectil_player.png" type="Texture" id=6]
+[ext_resource path="res://Juego/Proyectiles/sonido_disparo.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Juego/Explosiones/Explosion.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Juego/UI/Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=4]
+size = 110
+font_data = ExtResource( 9 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ElementosAnimacion/PlayerOrange:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -200, 775 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ElementosAnimacion/Interceptor:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1500, 775 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ElementosAnimacion/ProyectilPlayer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "avance"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ElementosAnimacion/PlayerOrange:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 880, 775 ), Vector2( 2200, 775 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "disparo"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ElementosAnimacion/PlayerOrange:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -200, 775 ), Vector2( 880, 775 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ElementosAnimacion/Interceptor:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2200, 775 ), Vector2( 1500, 775 ) ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("ElementosAnimacion/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 2 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ElementosAnimacion/ProyectilPlayer2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 900, 825 ), Vector2( 900, 825 ), Vector2( 1400, 825 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ElementosAnimacion/ProyectilPlayer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 900, 725 ), Vector2( 900, 725 ), Vector2( 1400, 725 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ElementosAnimacion/ProyectilPlayer:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ElementosAnimacion/ProyectilPlayer2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ElementosAnimacion/Interceptor:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "mover_texto"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ElementosAnimacion/Label:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="MenuVictoria" type="Node"]
+pause_mode = 2
+script = ExtResource( 3 )
+explosion = ExtResource( 8 )
+
+[node name="ElementosAnimacion" type="Node" parent="."]
+
+[node name="PlayerOrange" type="Sprite" parent="ElementosAnimacion"]
+position = Vector2( -200, 775 )
+rotation = 1.5708
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="Interceptor" type="Sprite" parent="ElementosAnimacion"]
+position = Vector2( 1500, 775 )
+rotation = 1.5708
+texture = ExtResource( 4 )
+
+[node name="ProyectilPlayer" type="Sprite" parent="ElementosAnimacion"]
+position = Vector2( 1400, 725 )
+rotation = 1.5708
+texture = ExtResource( 6 )
+
+[node name="ProyectilPlayer2" type="Sprite" parent="ElementosAnimacion"]
+visible = false
+position = Vector2( 1400, 825 )
+rotation = 1.5708
+texture = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ElementosAnimacion"]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[node name="Label" type="Label" parent="ElementosAnimacion"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -386.0
+margin_top = 48.0
+margin_right = 386.0
+margin_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 1.08664, 1.08664 )
+rect_pivot_offset = Vector2( 386, 83 )
+custom_fonts/font = SubResource( 4 )
+text = "¡Victoria!"
+align = 1
+valign = 1
+
+[node name="StarFieldBackground" parent="." instance=ExtResource( 1 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "disparo"
+anims/RESET = SubResource( 1 )
+anims/avance = SubResource( 3 )
+anims/disparo = SubResource( 2 )
+
+[node name="AnimarTexto" type="AnimationPlayer" parent="."]
+autoplay = "mover_texto"
+anims/mover_texto = SubResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -397.5
+margin_top = -267.5
+margin_right = 397.5
+margin_bottom = 29.5
+
+[node name="BotonMenu" parent="VBoxContainer" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 795.0
+margin_bottom = 142.0
+text = "menú principal"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 146.0
+margin_right = 795.0
+margin_bottom = 150.0
+
+[node name="BotonSalir" parent="VBoxContainer" instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 154.0
+margin_right = 795.0
+margin_bottom = 297.0
+text = "salir del juego"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="pressed" from="VBoxContainer/BotonMenu" to="." method="_on_BotonMenu_pressed"]
+[connection signal="pressed" from="VBoxContainer/BotonSalir" to="." method="_on_BotonSalir_pressed"]

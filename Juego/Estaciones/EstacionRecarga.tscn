@@ -99,9 +99,11 @@ anims/default = SubResource( 5 )
 
 [node name="CargaSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -8.0
 
 [node name="VacioSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -8.0
 
 [node name="BarraEnergia" type="ProgressBar" parent="."]
 margin_left = -75.0
@@ -113,6 +115,7 @@ custom_styles/fg = SubResource( 7 )
 custom_styles/bg = SubResource( 8 )
 value = 80.0
 
+[connection signal="sin_energia" from="." to="." method="_on_EstacionRecarga_sin_energia"]
 [connection signal="body_entered" from="AreaRecarga" to="." method="_on_AreaRecarga_body_entered"]
 [connection signal="body_exited" from="AreaRecarga" to="." method="_on_AreaRecarga_body_exited"]
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]

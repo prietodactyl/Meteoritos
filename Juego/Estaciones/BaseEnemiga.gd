@@ -11,7 +11,7 @@ export var intervalo_spawn:float = 0.8
 onready var animaciones:AnimationPlayer = $AnimationPlayer
 onready var impacto_sfx:AudioStreamPlayer2D = $ImpactoSFX
 onready var timer_spawner:Timer = $TimerSpawnerEnemigos
-onready var barra_salud:BarraSalud = $AreaColision/BarraSalud
+onready var barra_salud:BarraSalud = $BarraSalud
 
 ## Atributos
 var esta_destruido:bool = false

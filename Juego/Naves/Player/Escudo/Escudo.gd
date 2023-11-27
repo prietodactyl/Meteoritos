@@ -43,6 +43,13 @@ func desactivar() -> void:
 	esta_activo = false
 	controlar_colisionador(true)
 	animacion.play("desactivando")
+	Eventos.emit_signal("ocultar_energia_escudo")
+
+func usar_escudo() -> void:
+	if esta_activo:
+		desactivar()
+	else:
+		activar()
 
 func controlar_energia(consumo:float) -> void:
 	energia += consumo

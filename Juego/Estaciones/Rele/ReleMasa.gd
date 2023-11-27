@@ -30,11 +30,11 @@ func _on_Animaciones_animation_finished(anim_name: String) -> void:
 		animaciones.play("activada")
 
 func _on_DetectorPlayer_body_entered(body: Node) -> void:
-	colision_detector_player.set_deferred("disabled", true)
-	animaciones.play("super_activada")
-	body.desactivar_controles()
-	atraer_player(body)
-
+	if body is Player:
+		colision_detector_player.set_deferred("disabled", true)
+		animaciones.play("super_activada")
+		body.desactivar_controles()
+		atraer_player(body)
 
 func _on_Tween_tween_all_completed() -> void:
-	print("Pasate de nivel")
+	Eventos.emit_signal("nivel_completado")

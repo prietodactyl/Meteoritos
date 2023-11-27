@@ -19,6 +19,7 @@ export var radio_desgaste:float = -1.0
 # See `appear()` and `disappear()` for more information.
 var is_casting := false setget set_is_casting
 var energia_original:float
+var esta_disparando:bool = false
 
 onready var fill := $FillLine2D
 onready var tween := $Tween
@@ -44,12 +45,17 @@ func set_is_casting(cast: bool) -> void:
 	is_casting = cast
 
 	if is_casting:
+		esta_disparando = true
 		laser_sfx.play()
 		cast_to = Vector2.ZERO
 		fill.points[1] = cast_to
 		appear()
 	else:
-		Eventos.emit_signal("ocultar_energia_laser")
+		if esta_disparando:
+			Eventos.emit_signal("ocultar_suavizado_energia_laser")
+			esta_disparando = false
+		else:
+			Eventos.emit_signal("ocultar_energia_laser")
 		laser_sfx.stop()
 		collision_particles.emitting = false
 		disappear()

@@ -16,6 +16,7 @@ velocidad_proyectil = 700
 
 [node name="DisparoSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Timer" type="Timer" parent="."]

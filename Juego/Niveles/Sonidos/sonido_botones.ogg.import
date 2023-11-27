@@ -11,5 +11,5 @@ dest_files=[ "res://.import/sonido_botones.ogg-f943e0403834b3190cce6da2939832b4.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

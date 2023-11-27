@@ -2,14 +2,16 @@ class_name Nivel
 extends Node2D
 
 ## Atributos export
+export(String, FILE, "*.tscn") var prox_nivel = ""
+export var tiempo_limite:int = 10
+export var tiempo_transicion_camara:float = 2.0
+export var tiempo_bonus:int = 5
 export var explosion:PackedScene = null
 export var meteorito:PackedScene = null
 export var explosion_meteorito:PackedScene = null
 export var sector_meteoritos:PackedScene = null
-export var tiempo_transicion_camara:float = 2.0
 export var enemigo_interceptor:PackedScene = null
 export var rele_masa:PackedScene = null
-export var tiempo_limite:int = 10
 export var musica_nivel:AudioStream = null
 export var musica_combate:AudioStream = null
 
@@ -50,6 +52,7 @@ func conectar_seniales() -> void:
 	Eventos.connect("nave_en_sector_peligro", self, "_on_nave_en_sector_peligro")
 	Eventos.connect("base_destruida", self, "_on_base_destruida")
 	Eventos.connect("spawn_orbital", self, "_on_spawn_orbital")
+	Eventos.connect("nivel_completado", self, "_on_nivel_completado")
 	
 func crear_contenedores() -> void:
 	contenedor_proyectiles = Node.new()
@@ -107,6 +110,7 @@ func controlar_meteoritos_restantes() -> void:
 	Eventos.emit_signal("cambio_numero_meteoritos", meteoritos_totales)
 	if meteoritos_totales == 0:
 		MusicaJuego.transicion_musicas()
+		Eventos.emit_signal("sector_meteoritos_finalizado")
 		contenedor_sector_meteoritos.get_child(0).queue_free()
 		camara_player.set_puede_hacer_zoom(true)
 		var zoom_actual = camara_player.zoom
@@ -142,7 +146,7 @@ func crear_explosiones(posicion:Vector2,
 			)
 			new_explosion.scale = tamanio_explosion
 			add_child(new_explosion)
-			yield(get_tree().create_timer(intervalo), "timeout")
+			yield(get_tree().create_timer(intervalo),"timeout")
 
 func contabilizar_bases_enemigas() -> int:
 	return contenedor_bases_enemigas.get_child_count()
@@ -154,30 +158,17 @@ func crear_rele() -> void:
 
 func crear_posicion_aleatoria_rele() -> Vector2:
 	randomize()
-	var valor_aleatorio = randi() % 7
-	match valor_aleatorio:
-		0:
-			return player.global_position + Vector2(-600,-300)
-		1:
-			return player.global_position + Vector2(-300,-600)
-		2:
-			return player.global_position + Vector2(300,-600)
-		3:
-			return player.global_position + Vector2(600,-300)
-		4:
-			return player.global_position + Vector2(600,300)
-		5:
-			return player.global_position + Vector2(300,600)
-		6:
-			return player.global_position + Vector2(-300,600)
-		7:
-			return player.global_position + Vector2(-600,300)
-		_:
-			return player.global_position 
+	var theta:float = randf() * 2 * PI
+	return player.global_position + Vector2(cos(theta), sin(theta)) * rand_range(650, 1000)
 
 func destruir_nivel() -> void:
 	crear_explosiones(player.global_position, 8, 2.0, Vector2(300.0, 200.0))
 	player.destruir()
+
+func _on_nivel_completado() -> void:
+	Eventos.emit_signal("nivel_terminado")
+	yield(get_tree().create_timer(1.0),"timeout")
+	get_tree().change_scene(prox_nivel)
 
 ## Señales Internas
 func _on_TweenCamara_tween_completed(object: Object, _key: NodePath) -> void:
@@ -201,6 +192,7 @@ func _on_disparo(proyectil:Proyectil) -> void:
 
 func _on_nave_destruida(nave:NaveBase, posicion:Vector2, num_explosiones: int) -> void:
 	if nave is Player:
+		player = null
 		transicion_camaras(
 			posicion,
 			posicion + crear_posicion_aleatoria(200.0, 200.0),
@@ -209,6 +201,10 @@ func _on_nave_destruida(nave:NaveBase, posicion:Vector2, num_explosiones: int) -
 		)
 		
 		$RestartTimer.start()
+		
+	if nave is EnemigoInterceptor:
+		tiempo_limite += tiempo_bonus
+		
 	crear_explosiones(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
 
 
@@ -222,6 +218,7 @@ func _on_spawn_meteorito(pos_spawn: Vector2, dir_meteorito:Vector2, tamanio:floa
 	contenedor_meteoritos.add_child(new_meteorito)
 
 func _on_meteorito_destruido(pos: Vector2) -> void:
+	tiempo_limite += tiempo_bonus
 	var new_explosion: ExplosionMeteorito = explosion_meteorito.instance()
 	new_explosion.global_position = pos
 	add_child(new_explosion)
@@ -241,9 +238,11 @@ func _on_base_destruida(_base, pos_partes:Array) -> void:
 		yield(get_tree().create_timer(0.5),"timeout")
 	
 	numero_bases_enemigas -= 1
-	if numero_bases_enemigas == 0:
+	if numero_bases_enemigas == 0 and player:
+		actualizador_timer.stop()
 		crear_rele()
 
 func _on_spawn_orbital(enemigo:EnemigoOrbital) -> void:
 	contenedor_enemigos.add_child(enemigo)
+
 

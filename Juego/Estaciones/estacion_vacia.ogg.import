@@ -11,5 +11,5 @@ dest_files=[ "res://.import/estacion_vacia.ogg-5cf499482e2d2b9c1f99001428c88325.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Juego/Niveles/NivelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Estaciones/BaseEnemiga.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Juego/Peligros/SectorDePeligro.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=4]
+
+[node name="Nivel6" instance=ExtResource( 1 )]
+prox_nivel = "res://Juego/UI/MenuVictoria.tscn"
+tiempo_limite = 150
+tiempo_bonus = 3
+
+[node name="SectorDePeligro" parent="TriggersInterceptores" index="0" instance=ExtResource( 3 )]
+position = Vector2( -2285, -3236 )
+tipo_peligro = "Enemigo"
+numero_peligros = 4
+
+[node name="SectorDePeligro2" parent="TriggersInterceptores" index="1" instance=ExtResource( 3 )]
+position = Vector2( -3235, 1674 )
+tipo_peligro = "Enemigo"
+numero_peligros = 4
+
+[node name="SectorDePeligro3" parent="TriggersInterceptores" index="2" instance=ExtResource( 3 )]
+position = Vector2( 2196, 5362 )
+tipo_peligro = "Enemigo"
+numero_peligros = 4
+
+[node name="SectorDePeligro4" parent="TriggersInterceptores" index="3" instance=ExtResource( 3 )]
+position = Vector2( 7830, 5860 )
+tipo_peligro = "Enemigo"
+numero_peligros = 4
+
+[node name="SectorDePeligro5" parent="TriggersInterceptores" index="4" instance=ExtResource( 3 )]
+position = Vector2( 7468, 1832 )
+tipo_peligro = "Enemigo"
+numero_peligros = 4
+
+[node name="SectorDePeligro" parent="TriggersLluviaMeteoritos" index="0" instance=ExtResource( 3 )]
+position = Vector2( -1426, 3620 )
+tipo_peligro = "Meteorito"
+numero_peligros = 7
+
+[node name="SectorDePeligro2" parent="TriggersLluviaMeteoritos" index="1" instance=ExtResource( 3 )]
+position = Vector2( 4502, 3620 )
+tipo_peligro = "Meteorito"
+numero_peligros = 7
+
+[node name="SectorDePeligro3" parent="TriggersLluviaMeteoritos" index="2" instance=ExtResource( 3 )]
+position = Vector2( 6494, -1222 )
+tipo_peligro = "Meteorito"
+numero_peligros = 7
+
+[node name="SectorDePeligro4" parent="TriggersLluviaMeteoritos" index="3" instance=ExtResource( 3 )]
+position = Vector2( 1946, -3689 )
+tipo_peligro = "Meteorito"
+numero_peligros = 7
+
+[node name="SectorDePeligro5" parent="TriggersLluviaMeteoritos" index="4" instance=ExtResource( 3 )]
+position = Vector2( -6426, -1811 )
+tipo_peligro = "Meteorito"
+numero_peligros = 7
+
+[node name="EstacionRecarga" parent="ContenedorEstaciones" index="0" instance=ExtResource( 4 )]
+position = Vector2( -2353, -973 )
+
+[node name="EstacionRecarga2" parent="ContenedorEstaciones" index="1" instance=ExtResource( 4 )]
+position = Vector2( 9843, -2308 )
+
+[node name="EstacionRecarga3" parent="ContenedorEstaciones" index="2" instance=ExtResource( 4 )]
+position = Vector2( 6290, 6766 )
+
+[node name="BaseEnemiga" parent="ContenedorBasesEnemigas" index="0" instance=ExtResource( 2 )]
+position = Vector2( -5645, 2366 )
+hitpoints = 40.0
+numero_orbitales = 7
+
+[node name="BaseEnemiga2" parent="ContenedorBasesEnemigas" index="1" instance=ExtResource( 2 )]
+position = Vector2( 1302, 6439 )
+hitpoints = 40.0
+numero_orbitales = 7
+
+[node name="BaseEnemiga3" parent="ContenedorBasesEnemigas" index="2" instance=ExtResource( 2 )]
+position = Vector2( 9199, 2819 )
+hitpoints = 40.0
+numero_orbitales = 7
+
+[node name="BaseEnemiga4" parent="ContenedorBasesEnemigas" index="3" instance=ExtResource( 2 )]
+position = Vector2( 5760, -3811 )
+hitpoints = 40.0
+numero_orbitales = 7
+
+[node name="BaseEnemiga5" parent="ContenedorBasesEnemigas" index="4" instance=ExtResource( 2 )]
+position = Vector2( -3540, -4377 )
+hitpoints = 40.0
+numero_orbitales = 7

@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://playerShip1_orange.png" type="Texture" id=1]
 [ext_resource path="res://Juego/UI/HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://Juego/UI/HUD/ContenedorInformacion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Juego/UI/HUD/ContenedorInformacionEnergia.tscn" type="PackedScene" id=4]
@@ -23,7 +22,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade_in"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
@@ -31,7 +29,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
@@ -240,17 +238,8 @@ margin_right = 1920.0
 margin_bottom = 1080.0
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="FadeCanvas/ColorRect"]
-margin_left = 616.0
-margin_top = 267.0
-margin_right = 1246.0
-margin_bottom = 768.0
-mouse_filter = 2
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeCanvas"]
+autoplay = "default"
 anims/default = SubResource( 1 )
 anims/fade_in = SubResource( 2 )
 
@@ -296,8 +285,8 @@ anims/ocultar = SubResource( 9 )
 anims/ocultar_suavizado = SubResource( 10 )
 
 [node name="Label" parent="InfoTiempoRestante" index="1"]
-text = "Meteoritos restantes
-0"
+text = "Tiempo restante
+00:27"
 
 [node name="InfoLaser" parent="." instance=ExtResource( 4 )]
 margin_left = 1558.0
@@ -318,6 +307,7 @@ margin_left = 21.0
 margin_top = 86.0
 margin_right = 327.0
 margin_bottom = 125.0
+value = 75.0
 
 [node name="InfoEscudo" parent="." instance=ExtResource( 4 )]
 margin_left = 1558.0
@@ -344,6 +334,7 @@ margin_left = 21.0
 margin_top = 86.0
 margin_right = 327.0
 margin_bottom = 125.0
+value = 75.0
 
 [node name="Minimap" parent="." instance=ExtResource( 5 )]
 

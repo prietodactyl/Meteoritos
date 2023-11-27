@@ -10,7 +10,8 @@ onready var musica_combate:AudioStreamPlayer = $MusicaCombate
 onready var tween_on:Tween = $TweenMusicaOn
 onready var tween_off:Tween = $TweenMusicaOff
 onready var lista_musicas:Dictionary = {
-	"menu_principal": $MusicaMenuPrincipal
+	"menu_principal": $MusicaMenuPrincipal,
+	"menu_victoria": $MusicaMenuVictoria
 } setget ,get_lista_musicas
 
 ## Atributos
@@ -27,6 +28,7 @@ func set_streams(stream_musica:AudioStream, stream_combate:AudioStream) -> void:
 
 func play_musica_nivel() -> void:
 	stop_todo()
+	musica_nivel.volume_db = -5
 	musica_nivel.play()
 
 func stop_todo() -> void:

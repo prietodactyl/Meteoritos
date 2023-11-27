@@ -1,7 +1,7 @@
 extends MarginContainer
 
 ## Atributos Export
-export var escala_zoom:float = 4.0
+export var escala_zoom:float = 2.5
 export var tiempo_visible:float = 5.0
 
 ## Atributos Onready
@@ -42,6 +42,7 @@ func set_esta_visible(hacer_visible:bool) -> void:
 ## Métodos
 func _ready() -> void:
 	set_process(false)
+	timer_visibilidad.wait_time = tiempo_visible
 	timer_visibilidad.start()
 	icono_player.position = zona_renderizado.rect_size * 0.5
 	escala_grilla = zona_renderizado.rect_size / (get_viewport_rect().size * escala_zoom)
@@ -68,6 +69,9 @@ func _on_nave_destruida(nave:NaveBase, _posicion, _explosiones) -> void:
 	if nave is Player:
 		player = null
 
+func _on_sector_meteoritos_finalizado() -> void:
+	set_esta_visible(true)
+
 func obtener_objetos_minimap() -> void:
 	var objetos_en_ventana:Array = get_tree().get_nodes_in_group("minimap")
 	for objeto in objetos_en_ventana:
@@ -85,6 +89,7 @@ func obtener_objetos_minimap() -> void:
 			items_minimap[objeto] = sprite_icono
 			items_minimap[objeto].visible = true
 			zona_renderizado.add_child(items_minimap[objeto])
+	set_esta_visible(true)
 
 func modificar_posicion_iconos() -> void:
 	for item in items_minimap:
@@ -98,18 +103,21 @@ func modificar_posicion_iconos() -> void:
 		if zona_renderizado.get_rect().has_point(pos_icono):
 			item_icono.scale = Vector2(1, 1)
 		else:
-			item_icono.scale = Vector2(0.7, 0.7)
+			var tween:SceneTreeTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
+			tween.tween_property(item_icono, "scale", Vector2(0.7, 0.7), 0.8)
 
 func conectar_seniales():
 	Eventos.connect("nivel_iniciado", self, "_on_nivel_iniciado")
 	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
 	Eventos.connect("minimap_objeto_creado", self, "obtener_objetos_minimap")
 	Eventos.connect("minimap_objeto_destruido", self, "quitar_icono")
+	Eventos.connect("sector_meteoritos_finalizado", self, "_on_sector_meteoritos_finalizado")
 
 func quitar_icono(objeto:Node2D) -> void:
 	if objeto in items_minimap:
 		items_minimap[objeto].queue_free()
 		items_minimap.erase(objeto)
+		set_esta_visible(true)
 
 ## Señales Internas
 func _on_TimerVisibilidad_timeout() -> void:

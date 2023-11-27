@@ -19,6 +19,7 @@ margin_right = 144.0
 margin_bottom = -18.0
 rect_min_size = Vector2( 288, 162 )
 script = ExtResource( 2 )
+tiempo_visible = 10.0
 
 [node name="CuadroMinimap" type="NinePatchRect" parent="."]
 margin_right = 288.0

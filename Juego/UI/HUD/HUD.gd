@@ -22,9 +22,10 @@ func conectar_seniales() -> void:
 	Eventos.connect("actualizar_tiempo_restante", self, "_on_actualizar_tiempo_restante")
 	Eventos.connect("cambio_energia_laser", self, "_on_cambio_energia_laser")
 	Eventos.connect("ocultar_energia_laser", info_laser, "ocultar")
+	Eventos.connect("ocultar_suavizado_energia_laser", info_laser, "ocultar_suavizado")
 	Eventos.connect("cambio_energia_escudo", self, "_on_cambio_energia_escudo")
-	Eventos.connect("ocultar_energia_escudo", info_escudo, "ocultar")
-	Eventos.connect("nave_destruida", self, "_on_nave_detruida")
+	Eventos.connect("ocultar_energia_escudo", info_escudo, "ocultar_suavizado")
+	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
 	
 func fade_in() -> void:
 	animations.play("fade_in")
@@ -66,7 +67,7 @@ func _on_cambio_energia_escudo(energia_max:float, energia_actual:float) -> void:
 	info_escudo.mostrar()
 	info_escudo.actualizar_energia(energia_max, energia_actual)
 
-func _on_nave_detruida(nave:NaveBase, _posicion, _explosiones) -> void:
+func _on_nave_destruida(nave:NaveBase, _posicion, _explosiones) -> void:
 	if nave is Player:
 		get_tree().call_group("contenedor_info", "set_esta_activo", false)
 		get_tree().call_group("contenedor_info", "ocultar")

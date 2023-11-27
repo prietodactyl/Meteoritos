@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Juego/Niveles/NivelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Estaciones/BaseEnemiga.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Juego/Peligros/SectorDePeligro.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=4]
+
+[node name="Nivel4" instance=ExtResource( 1 )]
+prox_nivel = "res://Juego/Niveles/Nivel5.tscn"
+tiempo_limite = 125
+tiempo_bonus = 4
+
+[node name="SectorDePeligro" parent="TriggersInterceptores" index="0" instance=ExtResource( 3 )]
+position = Vector2( 1409, -3159 )
+tipo_peligro = "Enemigo"
+numero_peligros = 3
+
+[node name="SectorDePeligro2" parent="TriggersInterceptores" index="1" instance=ExtResource( 3 )]
+position = Vector2( -2453, -571 )
+tipo_peligro = "Enemigo"
+numero_peligros = 3
+
+[node name="SectorDePeligro3" parent="TriggersInterceptores" index="2" instance=ExtResource( 3 )]
+position = Vector2( 2779, 1351 )
+tipo_peligro = "Enemigo"
+numero_peligros = 3
+
+[node name="SectorDePeligro" parent="TriggersLluviaMeteoritos" index="0" instance=ExtResource( 3 )]
+position = Vector2( -2378, 1884 )
+tipo_peligro = "Meteorito"
+numero_peligros = 5
+
+[node name="SectorDePeligro2" parent="TriggersLluviaMeteoritos" index="1" instance=ExtResource( 3 )]
+position = Vector2( 6013, 95 )
+tipo_peligro = "Meteorito"
+numero_peligros = 5
+
+[node name="SectorDePeligro3" parent="TriggersLluviaMeteoritos" index="2" instance=ExtResource( 3 )]
+position = Vector2( 3520, 4909 )
+tipo_peligro = "Meteorito"
+numero_peligros = 5
+
+[node name="EstacionRecarga" parent="ContenedorEstaciones" index="0" instance=ExtResource( 4 )]
+position = Vector2( 2355, 2287 )
+
+[node name="EstacionRecarga2" parent="ContenedorEstaciones" index="1" instance=ExtResource( 4 )]
+position = Vector2( -328, -3897 )
+
+[node name="BaseEnemiga" parent="ContenedorBasesEnemigas" index="0" instance=ExtResource( 2 )]
+position = Vector2( -767, 4669 )
+hitpoints = 35.0
+numero_orbitales = 5
+intervalo_spawn = 1.0
+
+[node name="BaseEnemiga2" parent="ContenedorBasesEnemigas" index="1" instance=ExtResource( 2 )]
+position = Vector2( 6727, 3350 )
+hitpoints = 35.0
+numero_orbitales = 5
+intervalo_spawn = 1.0
+
+[node name="BaseEnemiga3" parent="ContenedorBasesEnemigas" index="2" instance=ExtResource( 2 )]
+position = Vector2( 4160, -2192 )
+hitpoints = 35.0
+numero_orbitales = 5
+intervalo_spawn = 1.0
+
+[node name="BaseEnemiga4" parent="ContenedorBasesEnemigas" index="3" instance=ExtResource( 2 )]
+position = Vector2( -3752, -960 )
+hitpoints = 35.0
+numero_orbitales = 5
+intervalo_spawn = 1.0

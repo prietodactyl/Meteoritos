@@ -1,59 +1,54 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Juego/Naves/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Niveles/Nivel.gd" type="Script" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
 [ext_resource path="res://Juego/Meteoritos/SectorMeteoritos.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Juego/Explosiones/Explosion.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Juego/Peligros/SectorDePeligro.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Juego/UI/MenuPausa.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Juego/Explosiones/ExplosionMeteorito.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Juego/Meteoritos/Metorito.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Juego/Niveles/CamaraJuego.gd" type="Script" id=9]
-[ext_resource path="res://Juego/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Juego/Enemigos/EnemigoInterceptor.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Juego/Estaciones/BaseEnemiga.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Juego/Estaciones/Rele/ReleMasa.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Juego/UI/HUD/HUD.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Juego/Niveles/Música/POL-moon-castle-short.wav" type="AudioStream" id=15]
 [ext_resource path="res://Juego/Niveles/Música/POL-combat-plan-short.wav" type="AudioStream" id=16]
+[ext_resource path="res://Juego/Niveles/Fondos/StarFieldBackground.tscn" type="PackedScene" id=17]
 
-[node name="NivelTest" type="Node2D"]
+[node name="NivelBase" type="Node2D"]
 script = ExtResource( 2 )
+tiempo_limite = 60
+tiempo_transicion_camara = 0.5
 explosion = ExtResource( 5 )
 meteorito = ExtResource( 8 )
 explosion_meteorito = ExtResource( 7 )
 sector_meteoritos = ExtResource( 4 )
 enemigo_interceptor = ExtResource( 11 )
 rele_masa = ExtResource( 13 )
-tiempo_limite = 500
 musica_nivel = ExtResource( 15 )
 musica_combate = ExtResource( 16 )
 
+[node name="MenuPausa" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="StarFieldBackground" parent="." instance=ExtResource( 17 )]
+
 [node name="HUD" parent="." instance=ExtResource( 14 )]
+
+[node name="TriggersInterceptores" type="Node" parent="."]
 
 [node name="TriggersLluviaMeteoritos" type="Node" parent="."]
 
-[node name="SectorDePeligro2" parent="TriggersLluviaMeteoritos" instance=ExtResource( 6 )]
-position = Vector2( 960, 1823 )
-tipo_peligro = "Meteorito"
-numero_peligros = 2
-
 [node name="ContenedorEstaciones" type="Node" parent="."]
 
-[node name="EstacionRecarga" parent="ContenedorEstaciones" instance=ExtResource( 10 )]
-position = Vector2( 1693, 627 )
-
 [node name="ContenedorBasesEnemigas" type="Node" parent="."]
-
-[node name="BaseEnemiga" parent="ContenedorBasesEnemigas" instance=ExtResource( 12 )]
-position = Vector2( -672, 736 )
-
-[node name="TriggersInterceptores" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
 
 [node name="CamaraNivel" type="Camera2D" parent="."]
+position = Vector2( 960, 540 )
 script = ExtResource( 9 )
 
 [node name="TweenZoom" type="Tween" parent="CamaraNivel"]
@@ -61,11 +56,12 @@ script = ExtResource( 9 )
 [node name="TweenCamara" type="Tween" parent="."]
 
 [node name="RestartTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="ActualizadorTimer" type="Timer" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 994, 899 )
+position = Vector2( 960, 540 )
 potencia_rotacion = 120
 
 [connection signal="tween_completed" from="TweenCamara" to="." method="_on_TweenCamara_tween_completed"]

@@ -159,7 +159,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Meteoritos"
-run/main_scene="res://Juego/UI/MenuProvisorio.tscn"
+run/main_scene="res://Juego/UI/MenuPrincipal.tscn"
 config/icon="res://playerShip1_orange.png"
 
 [autoload]
@@ -178,9 +178,10 @@ gdscript/warnings/return_value_discarded=false
 window/size/width=1920
 window/size/height=1080
 window/size/resizable=false
-window/size/always_on_top=true
 window/size/test_width=1280
 window/size/test_height=720
+mouse_cursor/custom_image="res://Juego/UI/cursor.png"
+mouse_cursor/custom_image_hotspot=Vector2( 6, 6 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -253,6 +254,11 @@ recarga_laser={
 minimap={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
